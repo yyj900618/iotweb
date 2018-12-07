@@ -282,7 +282,7 @@ created(){
 }
 
 </script>
-<style scoped>
+<style scope="scoped">
 
 #searchcompany {
   color: #606266;

@@ -95,7 +95,7 @@ export default {
 }
 
 </script>
-<style scoped>
+<style scope="scoped">
 
 .mycompanyaddtitle {
   display: inline-block;

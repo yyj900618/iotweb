@@ -3,7 +3,7 @@
   <div>
     <!-- @click="getclickpoint" -->
     <baidu-map
-      class="map"
+      class="devicemap"
       center="重庆"
       :zoom="13"
       :scroll-wheel-zoom="true"
@@ -203,8 +203,8 @@ export default {
 };
 </script>
  
-<style scoped>
-.map {
+<style scope="scoped">
+.devicemap {
   width: 100%;
   height: 500px;
 }

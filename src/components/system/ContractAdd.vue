@@ -254,7 +254,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scope="scoped">
 .myusertitle {
   display: inline-block;
   width: 80px;

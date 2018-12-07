@@ -130,10 +130,11 @@ export default {
               })
     },
     sendoffline(){
+        console.log("进入离线发送")
         let params = new URLSearchParams()
         params.append('device_id', this.device_id)
         params.append('qos', 1) 
-        params.append('timeout', timeout) 
+        params.append('timeout', this.timeout) 
         this.$axios({
               method:"post",
               url:"/iot/cmds",

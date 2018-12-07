@@ -3,7 +3,7 @@
   <div>
 
     <baidu-map
-      class="map"
+      class="editdevicemap"
       :center="centerposition"
       :zoom="15"
       :scroll-wheel-zoom="true"
@@ -415,7 +415,7 @@ export default {
   margin-left: 8px;
 }
 
-.map {
+.editdevicemap {
   width: 50%;
   height: 400px;
   position: relative;

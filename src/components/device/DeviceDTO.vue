@@ -2,7 +2,7 @@
     <div>
 
     <baidu-map
-      class="map"
+      class="deviceDTOmap"
       :center="{lng:dto.location.lon,lat:dto.location.lat}"
       :zoom="15"
       :scroll-wheel-zoom="true"
@@ -106,7 +106,7 @@
 
     }
 </script>
-<style scoped>
+<style scope="scoped">
 .mytitlec {
   font-size: 20px;
   /* display: inline-block;  */
@@ -116,7 +116,7 @@
   color: #343536;
 }
 
-.map {
+.deviceDTOmap {
   width: 50%;
   height: 400px;
   position: relative;

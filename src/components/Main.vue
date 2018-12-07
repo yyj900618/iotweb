@@ -90,7 +90,7 @@
                 <div class="grid-content bg-purple-light">
                     
                    <el-col :span="24" class="breadcrumb-container" >
-                        <strong class="title">{{$route.name}}</strong>
+                        <strong style="width: 200px; float: left; color: #1a2025;">{{$route.name}}</strong>
                         <el-breadcrumb separator="/" class="breadcrumb-inner">
                             <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
                                 {{ item.name }}
@@ -167,7 +167,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope="scoped">
     .container {
         position: absolute;
         top: 0;

@@ -2,7 +2,7 @@
   <div>
     <h1>添加设备</h1>
      <baidu-map
-      class="map"
+      class="deviceaddmap"
       :center="centerposition"
       :zoom="15"
       :scroll-wheel-zoom="true"
@@ -399,7 +399,7 @@ export default {
   margin-left: 8px;
 }
 
-.map {
+.deviceaddmap {
   width: 50%;
   height: 400px;
   position: relative;
