@@ -145,7 +145,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="right">
+      <el-table-column align="right" width="250">
         <template
           slot="header"
           slot-scope="slot"
@@ -193,6 +193,19 @@
             @click="handleDelete(scope.$index, scope.row)"
             v-hasPermission="'device:delete'"
           ></el-button>
+
+          <el-button
+            size="mini"
+            type="danger"
+            icon="el-icon-sort"
+            circle
+            title="数据点"
+            @click="handleDatapoint(scope.$index, scope.row)"
+            v-hasPermission="'device:datapoint'"
+          ></el-button>
+
+
+
         </template>
       </el-table-column>
     </el-table>
@@ -248,6 +261,8 @@ export default {
       this.refesh();
     },
 
+   
+
     handlePrePage() {
       console.log("点击上一页");
       this.page = this.page - 1;
@@ -262,6 +277,15 @@ export default {
       this.page = 1;
       this.refesh();
     },
+
+     handleDatapoint(index, row){
+        console.log("点击了数据点");
+      this.$router.push({
+        path: "/device/datapoint",
+        query: { index: index, row: row }
+      });
+    },
+
 
     handleEdit(index, row) {
       console.log("点击了编辑按钮");
@@ -348,7 +372,7 @@ export default {
     },
 
     tableRowStyle({ row, rowIndex }) {
-      return "background-color: #F7F6Fd";
+      return "background-color: #F7F6Fd;";
     },
 
     refesh() {

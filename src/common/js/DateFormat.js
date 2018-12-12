@@ -17,6 +17,15 @@ export function formatDate (date, fmt) {
     }
     return fmt
   }
+
+  export function getFirstDayOfYear (date){
+    date.setDate(1);  
+    date.setMonth(0); 
+    date.setHours(0)
+    date.setMinutes(0)
+    date.setSeconds(0)
+    return formatDate(date,'yyyy-MM-ddThh:mm:ss')
+  }
   
   function padLeftZero (str) {
     return ('00' + str).substr(str.length)

@@ -5,6 +5,7 @@ import AddDevice from '@/components/device/AddDevice'
 import DeviceDTO from '@/components/device/DeviceDTO'
 import EditDevice from '@/components/device/EditDevice'
 import DeviceMap from '@/components/device/DeviceMap'
+import DataPoint from '@/components/device/DataPoint'
 
 const DeviceRouter = [{
     path: '/device',
@@ -28,7 +29,7 @@ const DeviceRouter = [{
         path: '/device/devicemap',
         component: DeviceMap,
         meta:{
-            permission:'device:add|device:delete|device:update|device:view|device:cmd'
+            permission:'device:map'
         },
         name: '设备地图'
     },
@@ -58,7 +59,15 @@ const DeviceRouter = [{
         component: EditDevice,
         name: '编辑设备',
         hidden:true
+    },
+
+    {
+        path: '/device/datapoint',
+        component: DataPoint,
+        name: '设备数据点',
+        hidden:true
     }
+
     ]
 }]
 

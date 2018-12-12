@@ -1,4 +1,6 @@
 <template>
+
+
     <div>
 
     <baidu-map
@@ -55,13 +57,16 @@
                 <span class="mytitlec">纬度：{{dto.location.lon}}</span> 
               </p>
 
-            <p v-if="dto.datastreams!=undefined&&dto.datastreams.size!=0"> 
+            <p v-if="dto.datastreams!=undefined&&dto.datastreams!=0"> 
               <span class="mytitlec">数据流：</span>   
-              <el-table :data="dto.datastreams" stripe style="width: 100%; margin-top:20px">
+              
+              <el-table :data="this.dto.datastreams" stripe style="width: 100%; margin-top:20px">
                 <el-table-column prop="id" label="数据流ID" width="180"></el-table-column>
                 <el-table-column prop="unit" label="单位" width="180"></el-table-column>
                 <el-table-column prop="unit_symbol" label="单位符号" width="180"></el-table-column>
                 <el-table-column prop="create_time" label="创建时间"></el-table-column>
+                <el-table-column prop="update_at" label="最新数据上传时间"></el-table-column>
+                <el-table-column prop="current_value" label="最新数据点"></el-table-column>
               </el-table>
            </p>
            <p  style="text-align:center;">
@@ -75,15 +80,20 @@
     export default {
         data() {
             return {
-                dto:{}
+                dto:{},
+              
             }
         },
         methods:{
             handleBack(){
             this.$router.go(-1);
-            }
+            },
+
+          
+
         },
         created() {
+           
             this.row = this.$route.query.row
             let device_id=''
             if (this.row.id != "" && this.row.id != null && this.row.id != undefined) {
@@ -93,11 +103,22 @@
              device_id=sessionStorage.getItem("device_id")
             }
             this.$axios.get("/iot/devices/"+device_id).then(
-                data=>{
-                    console.log(data)
-                    this.dto=data.data.data
-                }
-            )
+                devicedata=>{
+                    // console.log(data)
+                    this.dto=devicedata.data.data
+                    let deviceid=devicedata.data.data.id
+                    let streamidstr=''
+                    devicedata.data.data.datastreams.forEach(element => {
+                      streamidstr+=element.id+","
+                    });
+                    streamidstr = streamidstr.replace(/^,+/, "").replace(/,+$/, "");
+                    this.$axios.get("/iot/devices/"+deviceid+"/datastreams?datastream_ids="+streamidstr).then(streamdata=>{
+                      this.dto.datastreams=streamdata.data.data
+                      })
+                    })
+
+                    
+
         }
 
 
