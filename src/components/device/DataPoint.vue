@@ -21,10 +21,10 @@
     </el-checkbox-group>
 
     <p v-for="(datastream,index) in allpoint">
-      
-      <span v-if="allpoint[index]!=undefined">{{allpoint[index].id}}:</span>
-        <el-table
-        v-if="allpoint[index]!=undefined"
+
+      <span v-if="allpoint[index]!=undefined&&allpoint[index].id==show[index].streamid&&show[index].isshow">{{allpoint[index].id}}:</span>
+      <el-table
+        v-if="allpoint[index]!=undefined&&allpoint[index].id==show[index].streamid&&show[index].isshow"
         :data="allpoint[index].datapoints.filter(data => !search || data.value.toLowerCase().includes(search[index].toLowerCase()))"
         style="width: 100%"
         :max-height="300"
@@ -54,8 +54,8 @@
 
         </el-table-column>
 
-      </el-table> 
-      
+      </el-table>
+
     </p>
 
     <!-- <el-button @click="pushdata">默认按钮</el-button> -->
@@ -80,7 +80,7 @@ export default {
       //   streamid: "",
       //请求参数
       allpoint: [],
-      allpoint_temp:[],
+      allpoint_temp: [],
       starttime: "",
       endtime: "",
       limit: 100,
@@ -105,7 +105,7 @@ export default {
     },
 
     handleCheckedChange(value) {
-      console.log(value);
+      // console.log(value);
       let checkedCount = value.length;
       this.checkAll = checkedCount === this.streamids.length;
       this.isIndeterminate =
@@ -125,7 +125,6 @@ export default {
     }
   },
 
-    
   created() {
     let row = this.$route.query.row;
     if (row.id != "" && row.id != null && row.id != undefined) {
@@ -135,11 +134,14 @@ export default {
       this.device_id = sessionStorage.getItem("device_id");
     }
     this.$axios.get("/iot/devices/" + this.device_id).then(data => {
-      for (let i = 0; i <data.data.data.datastreams.length; i++) {
-        this.$set(this.streamids,i,data.data.data.datastreams[i].id)
-        this.$set(this.checked,i,data.data.data.datastreams[i].id)
-        this.$set(this.search,i,"")
-        this.$set(this.show,i,{streamid: data.data.data.datastreams[i].id,isshow: true})
+      for (let i = 0; i < data.data.data.datastreams.length; i++) {
+        this.$set(this.streamids, i, data.data.data.datastreams[i].id);
+        this.$set(this.checked, i, data.data.data.datastreams[i].id);
+        this.$set(this.search, i, "");
+        this.$set(this.show, i, {
+          streamid: data.data.data.datastreams[i].id,
+          isshow: true
+        });
         let firstday = getFirstDayOfYear(new Date());
         this.starttime = firstday; //默认设置为当年第一天
         this.endtime = formatDate(new Date(), "yyyy-MM-ddThh:mm:ss"); //默认设置为当前时间
@@ -160,19 +162,13 @@ export default {
               data.data.data.datastreams[i].id
           )
           .then(data => {
-            if (data.data.data.datastreams.length > 0){
-                // this.$set(this.allpoint_temp,i,data.data.data.datastreams[0])
-                 this.$set(this.allpoint,i,data.data.data.datastreams[0])
+            if (data.data.data.datastreams.length > 0) {
+              // this.$set(this.allpoint_temp,i,data.data.data.datastreams[0])
+              this.$set(this.allpoint, i, data.data.data.datastreams[0]);
             }
           });
       }
-      
     });
-
-
-
-
-
   }
 };
 </script>
