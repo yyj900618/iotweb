@@ -2,9 +2,9 @@
     <el-row class="container">
         <el-col :span="24" class="header">
             <el-col :span="5" class="logo" :class="'logo-width'">
-                <a href="/" style="text-decoration:none;color:#FFFFFF;">
-                {{sysName}}
-                </a>
+                <router-link :to="{ path: '/dashboard' }" style="text-decoration:none;color:#FFFFFF;">
+                    {{sysName}}
+                </router-link>
             </el-col>
             <el-col :span="2">
                 <div class="tools" @click.prevent="collapse">
@@ -154,9 +154,9 @@
                 this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
             },
             logout(){
-                sessionStorage.clear();
+                // sessionStorage.clear();
                 this.$router.push({path: '/login'})
-                this.$axios.post('/api/logout')
+                // this.$axios.post('/api/logout')
             }
         },
         mounted: function() {

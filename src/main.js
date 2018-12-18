@@ -35,9 +35,11 @@ Vue.use(BaiduMap, {
 Vue.component('bml-marker-cluster', BmlMarkerClusterer)
 Vue.prototype.$axios = axios
 
+
+
 axios.interceptors.response.use(
     res => {
-        if(res.data.code!=undefined&&res.data.code==1001){
+        if(res.data.code!=undefined&&(res.data.code==1001||res.data.code==10086)){
             Vue.prototype.$message({
                 type:'error',
                 message:res.data.msg
@@ -46,15 +48,16 @@ axios.interceptors.response.use(
             Router.push({path: '/login'})
             return Promise.reject(res.data.msg);
 
-        }else if(res.data.code!=undefined&&res.data.code==10086){
-            Vue.prototype.$message({
-                type:'error',
-                message:res.data.msg
-            });
-            sessionStorage.clear();
-            Router.push({path: '/login'})
-            return Promise.reject(res.data.msg);
         }
+        // else if(res.data.code!=undefined&&res.data.code==10086){
+        //     Vue.prototype.$message({
+        //         type:'error',
+        //         message:res.data.msg
+        //     });
+        //     sessionStorage.clear();
+        //     Router.push({path: '/login'})
+        //     return Promise.reject(res.data.msg);
+        // }
         else if(res.data.errno!=undefined&&res.data.errno!=0){
             Vue.prototype.$message({
                 type:'error',
